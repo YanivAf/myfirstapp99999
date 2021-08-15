@@ -1,5 +1,6 @@
 const express = require('express');
 const fs = require('fs');
+const path = require('path');
 const {
     v4: uuidv4
 } = require('uuid');
@@ -8,7 +9,9 @@ app = express();
 const port = process.env.PORT || 5555;
 
 app.use(express.json());
-app.use(express.static('public'));
+// app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 const readJson = () => {
     try {
