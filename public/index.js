@@ -80,8 +80,8 @@ var ToDos = /** @class */ (function () {
             this.toDoList.forEach(function (toDo) {
                 var toDoDueDate = new Date(toDo.dueDate);
                 options_1 = { day: 'numeric', month: 'short', year: 'numeric' };
-                var toDoDueDateString = toDoDueDate.toLocaleDateString('en-US', options_1);
-                var statusClass = '';
+                var toDoDueDateString = toDoDueDate.toLocaleDateString('en-US', options_1); //YS: Nice, you can also use a library called moment which does this automatically. 
+                var statusClass = ''; //YS: Good! 
                 switch (toDo.status) {
                     case 'Pending...':
                         statusClass = 'todo__item--status-pending';
@@ -141,7 +141,7 @@ var handleAddToDo = function (ev) { return __awaiter(_this, void 0, Promise, fun
                 toDo = { content: content, status: 'Pending...', dueDate: dueDate, uuid: null, createdDate: new Date(), editedDate: null };
                 return [4 /*yield*/, postToDo(toDo)];
             case 1:
-                _a.sent();
+                _a.sent(); //YS: Very nice
                 return [4 /*yield*/, getData(null, null)];
             case 2:
                 _a.sent();
@@ -199,11 +199,13 @@ var handleEditToDo = function (ev) { return __awaiter(_this, void 0, Promise, fu
     });
 }); };
 var handleDeleteToDo = function (ev) { return __awaiter(_this, void 0, Promise, function () {
-    var toDoAnsestor, uuid, error_3;
+    var option, toDoAnsestor, uuid, error_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 3, , 4]);
+                _a.trys.push([0, 4, , 5]);
+                option = confirm("Are you sure do you want to delete?");
+                if (!option) return [3 /*break*/, 3];
                 toDoAnsestor = (ev.target.className === 'fa fa-trash') ? ev.target.parentElement.parentElement : ev.target.parentElement;
                 uuid = toDoAnsestor.getAttribute("id");
                 return [4 /*yield*/, deleteToDo(uuid)];
@@ -212,12 +214,13 @@ var handleDeleteToDo = function (ev) { return __awaiter(_this, void 0, Promise, 
                 return [4 /*yield*/, getData(null, null)];
             case 2:
                 _a.sent();
-                return [3 /*break*/, 4];
-            case 3:
+                _a.label = 3;
+            case 3: return [3 /*break*/, 5];
+            case 4:
                 error_3 = _a.sent();
                 console.error(error_3);
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
+                return [3 /*break*/, 5];
+            case 5: return [2 /*return*/];
         }
     });
 }); };
