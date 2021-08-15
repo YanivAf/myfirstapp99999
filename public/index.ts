@@ -187,11 +187,14 @@ const handleEditToDo = async (ev: any): Promise<void> => {
 
 const handleDeleteToDo = async (ev: any): Promise<void> => {
   try {
-    const toDoAnsestor: HTMLElement = (ev.target.className === 'fa fa-trash') ? ev.target.parentElement.parentElement : ev.target.parentElement;
-    const uuid: string = toDoAnsestor.getAttribute("id"); //YS: Same as in the edit, 
-    
-    await deleteToDo(uuid);
-    await getData(null, null);
+    const option = confirm(`Are you sure do you want to delete?`);
+    if (option) {
+      const toDoAnsestor: HTMLElement = (ev.target.className === 'fa fa-trash') ? ev.target.parentElement.parentElement : ev.target.parentElement;
+      const uuid: string = toDoAnsestor.getAttribute("id"); //YS: Same as in the edit, 
+      
+      await deleteToDo(uuid);
+      await getData(null, null);
+    }
 
   } catch (error) {
     console.error(error);
